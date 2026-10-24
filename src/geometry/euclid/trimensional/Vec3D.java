@@ -45,6 +45,10 @@ public class Vec3D {
         return Math.sqrt(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     }
 
+    public boolean normalized() {
+        return this.getMagnitude() == 1;
+    }
+
     public Vec3D add(Vec3D vec) {
         return new Vec3D(
                 vec.getEnd(),

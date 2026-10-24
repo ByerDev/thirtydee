@@ -61,7 +61,11 @@ public class Pos3D {
     }
 
     // https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
-    public Pos3D rotate(double angle, Vec3D axis) {
+    public Pos3D rotate(double angle, Vec3D axis) throws IllegalArgumentException {
+        if (!axis.normalized()) {
+            throw new IllegalArgumentException("The axis vector has to be normalized.");
+        }
+
         final double s = Math.sin(angle);
         final double c = Math.cos(angle);
         final double c1 = 1 - c;
