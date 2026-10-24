@@ -46,28 +46,47 @@ public class Pos3D {
         return divide(pos.x, pos.y, pos.z);
     }
 
-    // https://en.wikipedia.org/wiki/Rotation_matrix#Basic_3D_rotations
-    public Pos3D rotate(double angle, Axis axis) {
+    // https://www.baeldung.com/java-matrix-multiplication#bd-own-implementation
+    private Pos3D rotateWithMatrix(double[][] rotationMatrix) {
+        double[] result = new double[3];
+
+        for (int row = 0; row < 3; row++) {
+            result[row] = 0;
+            result[row] += rotationMatrix[row][0] * x;
+            result[row] += rotationMatrix[row][1] * y;
+            result[row] += rotationMatrix[row][2] * z;
+        }
+
+        return new Pos3D(result[0], result[1], result[2]);
+    }
+
+    // https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
+    public Pos3D rotate(double angle, Vec3D axis) {
         final double s = Math.sin(angle);
         final double c = Math.cos(angle);
+        final double c1 = 1 - c;
 
-        return switch (axis) {
-            case X -> new Pos3D(
-                x,
-                y * c - z * s,
-                y * s + z * c
-            );
-            case Y -> new Pos3D(
-                x * c - z * s,
-                y,
-                x * s + z * c
-            );
-            case Z -> new Pos3D(
-                x * c - y * s,
-                x * s + y * c,
-                z
-            );
+        final Pos3D u = axis.normalize().getEnd();
+
+        final double[][] r = new double[][]{
+            new double[]{
+                u.x * u.x * c1 + c,
+                u.x * u.y * c1 - u.z * s,
+                u.x * u.z * c1 + u.y * s
+            },
+            new double[]{
+                u.x * u.y * c1 + u.z * s,
+                u.y * u.y * c1 + c,
+                u.y * u.z * c1 - u.x * s
+            },
+            new double[]{
+                u.x * u.z * c1 - u.y * s,
+                u.y * u.z * c1 + u.x * s,
+                u.z * u.z * c1 + c
+            }
         };
+
+        return rotateWithMatrix(r);
     }
 
     public Pos3D rotateAroundPoint(double angle, Axis axis, Pos3D origin) {
