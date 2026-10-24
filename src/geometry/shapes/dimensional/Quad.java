@@ -1,6 +1,5 @@
 package geometry.shapes.dimensional;
 
-import geometry.euclid.Axis;
 import geometry.euclid.trimensional.Pos3D;
 import geometry.euclid.trimensional.Vec3D;
 import geometry.shapes.fundamentals.Base;
@@ -39,7 +38,7 @@ public class Quad extends Base<Quad> {
         );
     }
 
-    public Quad rotateAroundPoint(double angle, Axis axis, Pos3D origin) {
+    public Quad rotateAroundPoint(double angle, Vec3D axis, Pos3D origin) {
         return new Quad(
             tri1.rotateAroundPoint(angle, axis, origin),
             tri2.rotateAroundPoint(angle, axis, origin)

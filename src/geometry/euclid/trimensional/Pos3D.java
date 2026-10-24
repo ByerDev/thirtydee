@@ -1,6 +1,5 @@
 package geometry.euclid.trimensional;
 
-import geometry.euclid.Axis;
 import geometry.euclid.dimensional.Pos2D;
 
 import java.util.Arrays;
@@ -8,6 +7,7 @@ import java.util.Arrays;
 
 public class Pos3D {
     public static final Pos3D ORIGIN = new Pos3D(0, 0, 0);
+    public static final double FULL_ROTATION = Math.PI * 2;
     public double x,y,z;
 
 
@@ -89,7 +89,7 @@ public class Pos3D {
         return rotateWithMatrix(r);
     }
 
-    public Pos3D rotateAroundPoint(double angle, Axis axis, Pos3D origin) {
+    public Pos3D rotateAroundPoint(double angle, Vec3D axis, Pos3D origin) {
         return this.sub(origin).rotate(angle, axis).add(origin);
     }
 

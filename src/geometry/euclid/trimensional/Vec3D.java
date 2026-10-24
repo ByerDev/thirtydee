@@ -1,7 +1,5 @@
 package geometry.euclid.trimensional;
 
-import geometry.euclid.Axis;
-
 public class Vec3D {
     public double x1, y1, z1, x2, y2, z2;
 
@@ -70,13 +68,13 @@ public class Vec3D {
         return multiply(new Vec3D(x1, y1, z1, x2, y2, z2));
     }
 
-    public Vec3D rotateAroundPoint(double angle, Axis axis, Pos3D origin) {
+    public Vec3D rotateAroundPoint(double angle, Vec3D axis, Pos3D origin) {
         return new Vec3D(
             this.getStart().rotateAroundPoint(angle, axis, origin),
             this.getEnd().rotateAroundPoint(angle, axis, origin)
         );
     }
-    public Vec3D rotate(double angle, Axis axis) {
+    public Vec3D rotate(double angle, Vec3D axis) {
         return this.rotateAroundPoint(angle, axis, this.getStart());
     }
 

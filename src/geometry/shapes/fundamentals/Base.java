@@ -1,6 +1,5 @@
 package geometry.shapes.fundamentals;
 
-import geometry.euclid.Axis;
 import geometry.euclid.trimensional.Pos3D;
 
 public abstract class Base<T extends Base<T>> implements Transformation<T> {
@@ -22,7 +21,7 @@ public abstract class Base<T extends Base<T>> implements Transformation<T> {
         return translate(target.sub(origin));
     }
 
-    public T rotate(double angle, Axis axis) {
+    public T rotate(double angle, Vec3D axis) {
         return rotateAroundPoint(angle, axis, origin);
     }
 }

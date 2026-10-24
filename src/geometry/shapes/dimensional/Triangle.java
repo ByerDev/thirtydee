@@ -1,6 +1,5 @@
 package geometry.shapes.dimensional;
 
-import geometry.euclid.Axis;
 import geometry.euclid.trimensional.Pos3D;
 import geometry.euclid.trimensional.Vec3D;
 import geometry.shapes.fundamentals.Base;
@@ -50,7 +49,7 @@ public class Triangle extends Base<Triangle> {
         );
     }
 
-    public Triangle rotateAroundPoint(double angle, Axis axis, Pos3D origin) {
+    public Triangle rotateAroundPoint(double angle, Vec3D axis, Pos3D origin) {
         return new Triangle(
             p1.rotateAroundPoint(angle, axis, origin),
             p2.rotateAroundPoint(angle, axis, origin),
